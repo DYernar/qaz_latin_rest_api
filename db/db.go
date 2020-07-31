@@ -22,6 +22,7 @@ func Connect() (*sql.DB, error) {
 		fmt.Print("\n\n\n", err, "\n\n\n")
 	}
 	_, err = db.Exec("create table if not exists users(userid serial primary key, username varchar, email varchar, name varchar, score int, token varchar)")
+	_, err = db.Exec("create table if not exists news(newsid serial primary key, title varchar, text varchar, img varchar)")
 
 	return db, err
 }

@@ -25,6 +25,8 @@ func main() {
 	mux.HandleFunc("/all", controller.GetData)
 	mux.HandleFunc("/score", controller.UpdateScore)
 	mux.HandleFunc("/getAll", controller.GetUserScore)
+	mux.HandleFunc("/getNews", controller.GetNews)
+	mux.HandleFunc("/addNews", controller.AddNews)
 
 	handler := cors.Default().Handler(mux)
 
