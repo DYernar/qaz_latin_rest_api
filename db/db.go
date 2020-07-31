@@ -8,7 +8,13 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 )
 
-const dbConf = "host=localhost port=5432 user=postgres password=postgres dbname=postgres sslmode=disable"
+const host = "ec2-50-17-90-177.compute-1.amazonaws.com"
+const port = "5432"
+const user = "ogubyitzqmixyk"
+const password = "d667be7dedcbc80818844c162250dfbb7cd629b00322f98b22e956ce710fdf7d"
+const dbname = "denjk42qaepkv9"
+
+const dbConf = "host=" + host + " port=" + port + " user=" + user + " password=" + password + " dbname=" + dbname + "sslmode=disable"
 
 func Connect() (*sql.DB, error) {
 	db, err := sql.Open("postgres", dbConf)
