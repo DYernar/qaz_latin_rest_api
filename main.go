@@ -11,7 +11,7 @@ import (
 
 func main() {
 
-	port := os.Getenv("$PORT")
+	port := os.Getenv("PORT")
 	if port == "" {
 		port = "4444"
 	}
@@ -27,5 +27,8 @@ func main() {
 
 	handler := cors.Default().Handler(mux)
 
-	log.Fatal(http.ListenAndServe(":"+port, handler))
+	err := http.ListenAndServe(":"+port, handler)
+	if err != nil {
+		log.Fatal("Listen and serve err: ", err)
+	}
 }
