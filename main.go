@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -12,6 +13,12 @@ import (
 func main() {
 
 	port := os.Getenv("PORT")
+	if port == "" {
+		fmt.Println("port not found")
+		fmt.Println("port not found")
+		fmt.Println("port not found")
+		port = "4444"
+	}
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
@@ -23,8 +30,6 @@ func main() {
 	mux.HandleFunc("/score", controller.UpdateScore)
 
 	handler := cors.Default().Handler(mux)
-	if port == "" {
-		port = "4444"
-	}
+
 	log.Fatal(http.ListenAndServe(":"+port, handler))
 }
