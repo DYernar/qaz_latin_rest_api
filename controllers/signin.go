@@ -33,9 +33,9 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 	var userdata model.User
 
 	err := json.NewDecoder(r.Body).Decode(&userdata)
-	fmt.Println(r.Body)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println(r.Body)
+		fmt.Println("error: ", err)
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
