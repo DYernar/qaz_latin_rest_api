@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -12,9 +11,8 @@ import (
 
 func main() {
 
-	port := os.Getenv("PORT")
+	port := os.Getenv("$PORT")
 	if port == "" {
-
 		port = "4444"
 	}
 	mux := http.NewServeMux()
@@ -28,9 +26,6 @@ func main() {
 	mux.HandleFunc("/score", controller.UpdateScore)
 
 	handler := cors.Default().Handler(mux)
-	fmt.Println(port)
-	fmt.Println(port)
-	fmt.Println(port)
 
 	log.Fatal(http.ListenAndServe(":"+port, handler))
 }
