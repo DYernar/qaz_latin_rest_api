@@ -20,3 +20,30 @@ func InsertNews(news model.News) {
 	}
 	db.Close()
 }
+
+func GetAllNews() []model.News {
+	var ret []model.News
+	db, err := Connect()
+
+	if err != nil {
+		fmt.Println(err)
+		return ret
+	}
+
+	row, err := db.Query("select title, text, img from news")
+
+	if err != nil {
+		fmt.Println(err)
+		return ret
+	}
+
+	defer row.Close()
+
+	for row.Next() {
+		var n model.News
+		row.Scan(&n.Title, &n.Text, &n.Image)
+		ret = append(ret, n)
+	}
+
+	return ret
+}

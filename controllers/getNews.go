@@ -10,6 +10,13 @@ import (
 
 func GetNews(w http.ResponseWriter, r *http.Request) {
 	Verify(w, r)
+
+	news := db.GetAllNews()
+
+	json, _ := json.Marshal(&news)
+
+	w.WriteHeader(200)
+	w.Write([]byte(json))
 }
 
 func AddNews(w http.ResponseWriter, r *http.Request) {
