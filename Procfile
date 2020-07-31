@@ -1,1 +1,1 @@
-web: [directory] replace [directory]
+web: ./qaz_latin
