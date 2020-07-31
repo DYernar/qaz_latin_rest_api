@@ -24,7 +24,7 @@ func main() {
 
 	mux.HandleFunc("/all", controller.GetData)
 	mux.HandleFunc("/score", controller.UpdateScore)
-	mux.HandleFunc("/getUsersWithScore", controller.GetUserScore)
+	mux.HandleFunc("/getAll", controller.GetUserScore)
 
 	handler := cors.Default().Handler(mux)
 

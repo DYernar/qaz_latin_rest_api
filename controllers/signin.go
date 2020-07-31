@@ -14,11 +14,6 @@ import (
 var jwtKey = []byte("my_secret_key")
 var AppToken = "Qazaq latin app"
 
-var users = map[string]string{
-	"user1": "password1",
-	"user2": "password2",
-}
-
 type Claims struct {
 	Username string `json:"username"`
 	jwt.StandardClaims
