@@ -6,4 +6,5 @@ require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/jinzhu/gorm v1.9.15
 	github.com/rs/cors v1.7.0
+	gopkg.in/gin-gonic/gin.v1 v1.3.0
 )

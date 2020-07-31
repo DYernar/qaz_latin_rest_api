@@ -7,10 +7,7 @@ import (
 )
 
 func GetData(w http.ResponseWriter, r *http.Request) {
-	if r.Header.Get("appToken") != AppToken {
-		w.WriteHeader(http.StatusBadRequest)
-		return
-	}
+	Verify(w,r)
 
 	token := r.Header.Get("token")
 
