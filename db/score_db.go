@@ -65,3 +65,33 @@ func InsertScore(userid, gameid, score int) {
 	}
 	db.Close()
 }
+
+func GetScore(userid int, gameid int) []int {
+	var ret []int
+	db, err := Connect()
+
+	if err != nil {
+		fmt.Println(err)
+		db.Close()
+		return ret
+	}
+
+	row, err := db.Query("select score from game_results where gameid=$1 userid=$2", gameid, userid)
+
+	if err != nil {
+		fmt.Println(err)
+		db.Close()
+		return ret
+	}
+
+	defer row.Close()
+
+	for row.Next() {
+		var n int
+		row.Scan(&n)
+		ret = append(ret, n)
+	}
+
+	db.Close()
+	return ret
+}
