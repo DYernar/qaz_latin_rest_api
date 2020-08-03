@@ -24,10 +24,11 @@ func main() {
 
 	mux.HandleFunc("/all", controller.GetData)
 	mux.HandleFunc("/score", controller.UpdateScore)
-	mux.HandleFunc("/getAll", controller.GetUserScore)
+	mux.HandleFunc("/getAll", controller.GetAllUserScore)
 	mux.HandleFunc("/getNews", controller.GetNews)
 	mux.HandleFunc("/addNews", controller.AddNews)
-
+	mux.HandleFunc("/getScores", controller.GetScores)
+	mux.HandleFunc("/drop", controller.DropTables)
 	handler := cors.Default().Handler(mux)
 
 	err := http.ListenAndServe(":"+port, handler)

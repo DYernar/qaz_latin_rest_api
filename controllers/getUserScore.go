@@ -8,7 +8,7 @@ import (
 	"gopkg.in/gin-gonic/gin.v1/json"
 )
 
-func GetUserScore(w http.ResponseWriter, r *http.Request) {
+func GetAllUserScore(w http.ResponseWriter, r *http.Request) {
 	Verify(w, r)
 
 	ret := db.GetAllUser()
