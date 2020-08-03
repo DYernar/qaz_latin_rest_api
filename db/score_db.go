@@ -30,7 +30,7 @@ func GetScores(userid int) []int {
 		return ret
 	}
 
-	row, err := db.Query("select score from select_word")
+	row, err := db.Query("select score from select_word where userid=$1", userid)
 
 	if err != nil {
 		fmt.Println(err)
