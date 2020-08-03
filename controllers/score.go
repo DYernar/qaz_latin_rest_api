@@ -2,6 +2,7 @@ package controller
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"qaz_latin/db"
 	"strconv"
@@ -66,4 +67,40 @@ func GetScores(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(200)
 
 	w.Write(js)
+}
+
+func SaveScore(w http.ResponseWriter, r *http.Request) {
+	if r.Header.Get("appToken") != AppToken {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	tokenString := r.Header.Get("token")
+
+	if tokenString == "" {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	r.ParseForm()
+
+	score, err := strconv.Atoi(r.FormValue("score"))
+	if err != nil {
+		fmt.Println(err)
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	gameid, err := strconv.Atoi(r.FormValue("game"))
+
+	if err != nil {
+		fmt.Println(err)
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	user := db.GetUserFromToken(tokenString)
+
+	db.InsertScore(user.ID, gameid, score)
+
+	w.WriteHeader(200)
 }

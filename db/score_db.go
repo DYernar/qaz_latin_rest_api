@@ -49,3 +49,19 @@ func GetScores(userid int) []int {
 	db.Close()
 	return ret
 }
+
+func InsertScore(userid, gameid, score int) {
+	db, err := Connect()
+
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	_, err = db.Query("insert into game_results (gameid, userid, score) values ($1, $2, $3)", gameid, userid, score)
+
+	if err != nil {
+		fmt.Println(err)
+	}
+	db.Close()
+}

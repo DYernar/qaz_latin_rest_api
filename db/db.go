@@ -24,6 +24,7 @@ func Connect() (*sql.DB, error) {
 	_, err = db.Exec("create table if not exists users(userid serial primary key, username varchar, email varchar, name varchar, score int, token varchar)")
 	_, err = db.Exec("create table if not exists news(newsid serial primary key, title varchar, text varchar, img varchar)")
 	_, err = db.Exec("create table if not exists select_word(userid int, score int)")
+	_, err = db.Exec("create table if not exists game_results(gameid int, userid int, score int)")
 
 	return db, err
 }
