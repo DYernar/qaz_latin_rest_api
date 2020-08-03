@@ -7,6 +7,7 @@ func GetAllUser() []model.User {
 	db, err := Connect()
 
 	if err != nil {
+		db.Close()
 		return ret
 	}
 
@@ -18,6 +19,7 @@ func GetAllUser() []model.User {
 		ret = append(ret, user)
 	}
 
+	db.Close()
 	return ret
 
 }

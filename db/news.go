@@ -27,6 +27,7 @@ func GetAllNews() []model.News {
 
 	if err != nil {
 		fmt.Println(err)
+		db.Close()
 		return ret
 	}
 
@@ -34,6 +35,7 @@ func GetAllNews() []model.News {
 
 	if err != nil {
 		fmt.Println(err)
+		db.Close()
 		return ret
 	}
 
@@ -45,5 +47,6 @@ func GetAllNews() []model.News {
 		ret = append(ret, n)
 	}
 
+	db.Close()
 	return ret
 }

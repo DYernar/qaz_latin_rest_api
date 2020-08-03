@@ -26,6 +26,7 @@ func GetScores(userid int) []int {
 
 	if err != nil {
 		fmt.Println(err)
+		db.Close()
 		return ret
 	}
 
@@ -33,6 +34,7 @@ func GetScores(userid int) []int {
 
 	if err != nil {
 		fmt.Println(err)
+		db.Close()
 		return ret
 	}
 
@@ -44,5 +46,6 @@ func GetScores(userid int) []int {
 		ret = append(ret, n)
 	}
 
+	db.Close()
 	return ret
 }

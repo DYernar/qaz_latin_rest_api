@@ -32,21 +32,25 @@ func Drop() {
 	db, _ := Connect()
 	db.Exec("DROP TABLE users")
 	db.Exec("DROP TABLE select_word")
+	db.Close()
 }
 
 func InsertUser(user model.User) bool {
 	db, err := Connect()
 
 	if err != nil {
+		db.Close()
 		return false
 	}
 
 	_, err = db.Query("insert into users (username, email, name, score, token) values ($1, $2, $3, $4, $5)", user.Username, user.Email, user.Name, 0, "")
 
 	if err != nil {
+		db.Close()
 		return false
 	}
 
+	db.Close()
 	return true
 }
 
@@ -93,6 +97,7 @@ func UpdateScore(userid int, score int) {
 
 	if err != nil {
 		fmt.Println(err)
+		db.Close()
 		return
 	}
 
@@ -109,9 +114,11 @@ func UpdateScore(userid int, score int) {
 		_, err = db.Query("update users set score=$1 where userid=$2 ", score, userid)
 		if err != nil {
 			fmt.Println(err)
+			db.Close()
 			return
 		}
 	} else {
+		db.Close()
 		return
 	}
 }
@@ -120,6 +127,7 @@ func InsertToken(user model.User, token string) {
 	db, err := Connect()
 
 	if err != nil {
+		db.Close()
 		return
 	}
 
@@ -127,6 +135,7 @@ func InsertToken(user model.User, token string) {
 
 	if err != nil {
 		fmt.Println(err)
+		db.Close()
 		return
 	}
 
@@ -136,6 +145,7 @@ func InsertToken(user model.User, token string) {
 func GetToken(user model.User) string {
 	db, err := Connect()
 	if err != nil {
+		db.Close()
 		return ""
 	}
 
@@ -143,6 +153,7 @@ func GetToken(user model.User) string {
 
 	if err != nil {
 		fmt.Println(err)
+		db.Close()
 		return ""
 	}
 
@@ -154,6 +165,7 @@ func GetToken(user model.User) string {
 		row.Scan(&token)
 		break
 	}
+	db.Close()
 	return token
 }
 
@@ -161,6 +173,7 @@ func GetUserFromToken(token string) model.User {
 	var ret model.User
 	db, err := Connect()
 	if err != nil {
+		db.Close()
 		return ret
 	}
 
@@ -168,6 +181,7 @@ func GetUserFromToken(token string) model.User {
 
 	if err != nil {
 		fmt.Println(err)
+		db.Close()
 		return ret
 	}
 
@@ -179,5 +193,6 @@ func GetUserFromToken(token string) model.User {
 		row.Scan(&user.ID, &user.Username, &user.Email, &user.Name, &user.Score)
 		break
 	}
+	db.Close()
 	return user
 }
