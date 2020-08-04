@@ -33,6 +33,7 @@ func Drop() {
 	db, _ := Connect()
 	db.Exec("DROP TABLE users")
 	db.Exec("DROP TABLE select_word")
+	db.Exec("DROP TABLE game_result")
 	db.Close()
 }
 
