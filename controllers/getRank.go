@@ -22,7 +22,7 @@ func GetRankById(w http.ResponseWriter, r *http.Request) {
 
 	r.ParseForm()
 
-	gameid, err := strconv.Atoi(r.FormValue(r.FormValue("gameid")))
+	gameid, err := strconv.Atoi(r.FormValue("gameid"))
 
 	if err != nil {
 		fmt.Println(err)
