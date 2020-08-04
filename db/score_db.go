@@ -134,5 +134,6 @@ func GetUsersRank(gameid int) []model.User {
 	sort.Slice(ret, func(i, j int) bool {
 		return ret[i].Score < ret[j].Score
 	})
+	db.Close()
 	return ret
 }
