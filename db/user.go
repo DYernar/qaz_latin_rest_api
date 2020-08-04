@@ -23,3 +23,24 @@ func GetAllUser() []model.User {
 	return ret
 
 }
+
+func GetUserById(usreid int) model.User {
+	var ret model.User
+	db, err := Connect()
+
+	if err != nil {
+		db.Close()
+		return ret
+	}
+
+	row, err := db.Query("select * from users where userid=$1", usreid)
+
+	for row.Next() {
+		row.Scan(&ret.ID, &ret.Username, &ret.Email, &ret.Name, &ret.Score, &ret.Token)
+		break
+	}
+
+	db.Close()
+	return ret
+
+}

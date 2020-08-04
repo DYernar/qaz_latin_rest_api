@@ -31,6 +31,7 @@ func main() {
 	mux.HandleFunc("/getGameScore", controller.GetScore)
 	mux.HandleFunc("/saveScore", controller.SaveScore)
 	mux.HandleFunc("/drop", controller.DropTables)
+	mux.HandleFunc("/getRankById", controller.GetRankById)
 	handler := cors.Default().Handler(mux)
 
 	err := http.ListenAndServe(":"+port, handler)
