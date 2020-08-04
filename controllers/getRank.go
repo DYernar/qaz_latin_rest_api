@@ -15,6 +15,7 @@ func GetRankById(w http.ResponseWriter, r *http.Request) {
 	tokenString := r.Header.Get("token")
 
 	if tokenString == "" {
+		fmt.Print("no token provided")
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
