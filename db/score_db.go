@@ -76,7 +76,7 @@ func GetScore(userid int, gameid int) []int {
 		return ret
 	}
 
-	row, err := db.Query("select score from game_results where gameid=$1 userid=$2", gameid, userid)
+	row, err := db.Query("select score from game_results where gameid=$1 and userid=$2", gameid, userid)
 
 	if err != nil {
 		fmt.Println(err)
