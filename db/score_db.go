@@ -120,6 +120,7 @@ func GetUsersRank(gameid int) []model.User {
 	for row.Next() {
 		var userid int
 		var score int
+		row.Scan(&userid, &score)
 		if m[userid] < score {
 			m[userid] = score
 		}
