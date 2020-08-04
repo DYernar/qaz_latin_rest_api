@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"fmt"
 	"net/http"
 	"qaz_latin/db"
 	"strconv"
@@ -23,7 +24,7 @@ func GetRankById(w http.ResponseWriter, r *http.Request) {
 	gameid, err := strconv.Atoi(r.FormValue(r.FormValue("gameid")))
 
 	if err != nil {
-		print(err)
+		fmt.Println(err)
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
